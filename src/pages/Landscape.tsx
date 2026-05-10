@@ -5,46 +5,40 @@ const COTTAGE_IMG = "https://cdn.poehali.dev/projects/1a543a21-315b-4420-99b6-2c
 
 const STYLES = [
   {
-    emoji: "🏡",
     title: "Английский коттедж",
     desc: "Романтичные клумбы, вьющиеся розы, деревянные арки и естественный беспорядок, который выглядит идеально.",
     color: "#a0364e",
-    bg: "#fff0f4",
+    image: "https://cdn.poehali.dev/projects/1a543a21-315b-4420-99b6-2c1390619624/files/13d3decb-a223-4efe-b9b7-378b1627da70.jpg",
   },
   {
-    emoji: "⛩️",
     title: "Японский минимализм",
     desc: "Камни, мох, вода и тишина. Каждый элемент на своём месте. Пространство для созерцания.",
     color: "#2c5282",
-    bg: "#ebf8ff",
+    image: "https://cdn.poehali.dev/projects/1a543a21-315b-4420-99b6-2c1390619624/files/2593682c-1ec3-4ded-8c30-40047a43136f.jpg",
   },
   {
-    emoji: "🌻",
     title: "Прованский стиль",
     desc: "Лаванда, тимьян, выгоревшие краски, глиняные горшки и терракота. Юг Франции у вас дома.",
-    color: "#553c9a",
-    bg: "#faf5ff",
+    color: "#7c3aed",
+    image: "https://cdn.poehali.dev/projects/1a543a21-315b-4420-99b6-2c1390619624/files/488ca3c1-9d3d-4d01-ba9f-d1485c06a562.jpg",
   },
   {
-    emoji: "🌿",
     title: "Природный сад",
     desc: "Дикие травы, луговые цветы, без строгих форм. Максимальная польза для пчёл и бабочек.",
     color: "#276749",
-    bg: "#f0fff4",
+    image: "https://cdn.poehali.dev/projects/1a543a21-315b-4420-99b6-2c1390619624/files/175a7e52-5881-4233-b92d-4af9510004f1.jpg",
   },
   {
-    emoji: "🔷",
     title: "Регулярный стиль",
     desc: "Симметрия, стриженые бордюры, геометрические клумбы. Классика версальских парков.",
     color: "#1a6b5a",
-    bg: "#e8f7f3",
+    image: "https://cdn.poehali.dev/projects/1a543a21-315b-4420-99b6-2c1390619624/files/338b1a52-800b-4a5e-af71-4305eb2593fa.jpg",
   },
   {
-    emoji: "🪨",
     title: "Альпийская горка",
     desc: "Камни, карликовые хвойные, суккуленты и почвопокровные. Рельеф и природная фактура.",
     color: "#744210",
-    bg: "#fef3e2",
+    image: "https://cdn.poehali.dev/projects/1a543a21-315b-4420-99b6-2c1390619624/files/95fc2454-1935-4778-9eb5-754dbc33a4b5.jpg",
   },
 ];
 
@@ -119,24 +113,49 @@ export default function Landscape() {
             {STYLES.map((s, i) => (
               <div
                 key={i}
-                className="rounded-2xl p-6 cursor-pointer"
+                className="rounded-2xl overflow-hidden cursor-pointer"
                 style={{
-                  background: s.bg,
+                  background: "white",
                   border: `1px solid ${s.color}20`,
                   boxShadow: `0 4px 20px ${s.color}0a`,
-                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                  transition: "transform 0.35s ease, box-shadow 0.35s ease",
                 }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.transform = "translateY(-5px)"; (e.currentTarget as HTMLElement).style.boxShadow = `0 16px 40px ${s.color}20`; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; (e.currentTarget as HTMLElement).style.boxShadow = `0 4px 20px ${s.color}0a`; }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.transform = "translateY(-6px)";
+                  (e.currentTarget as HTMLElement).style.boxShadow = `0 20px 48px ${s.color}28`;
+                  const img = (e.currentTarget as HTMLElement).querySelector("img");
+                  if (img) img.style.transform = "scale(1.07)";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
+                  (e.currentTarget as HTMLElement).style.boxShadow = `0 4px 20px ${s.color}0a`;
+                  const img = (e.currentTarget as HTMLElement).querySelector("img");
+                  if (img) img.style.transform = "scale(1)";
+                }}
               >
-                <div
-                  className="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl mb-5"
-                  style={{ background: `${s.color}15`, border: `1px solid ${s.color}25` }}
-                >
-                  {s.emoji}
+                {/* Фото */}
+                <div className="relative overflow-hidden" style={{ height: "200px" }}>
+                  <img
+                    src={s.image}
+                    alt={s.title}
+                    className="w-full h-full object-cover"
+                    style={{ transition: "transform 0.6s ease" }}
+                  />
+                  <div
+                    className="absolute inset-0"
+                    style={{ background: `linear-gradient(to top, ${s.color}cc 0%, transparent 55%)` }}
+                  />
+                  <h3
+                    className="absolute bottom-0 left-0 px-5 pb-4 text-xl font-semibold"
+                    style={{ fontFamily: "'Cormorant Garamond', serif", color: "white", textShadow: "0 1px 4px rgba(0,0,0,0.3)" }}
+                  >
+                    {s.title}
+                  </h3>
                 </div>
-                <h3 className="text-xl font-semibold mb-2" style={{ fontFamily: "'Cormorant Garamond', serif", color: "hsl(var(--bark))" }}>{s.title}</h3>
-                <p className="text-sm leading-relaxed" style={{ color: "hsl(var(--muted-foreground))", fontFamily: "'Golos Text', sans-serif" }}>{s.desc}</p>
+                {/* Описание */}
+                <div className="px-5 py-4">
+                  <p className="text-sm leading-relaxed" style={{ color: "hsl(var(--muted-foreground))", fontFamily: "'Golos Text', sans-serif" }}>{s.desc}</p>
+                </div>
               </div>
             ))}
           </div>
