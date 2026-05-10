@@ -75,7 +75,7 @@ export default function Home() {
               Открыть календарь
             </button>
             <button
-              onClick={() => navigate("/tips")}
+              onClick={() => navigate("/garden")}
               className="px-8 py-3.5 rounded-full text-base font-medium transition-all hover:scale-105"
               style={{
                 background: "rgba(255,255,255,0.12)",
@@ -117,31 +117,42 @@ export default function Home() {
 
       {/* QUICK LINKS */}
       <section className="py-20" style={{ background: "hsl(var(--parchment))" }}>
-        <div className="container max-w-5xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="container max-w-6xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <p className="text-sm uppercase tracking-widest mb-3" style={{ color: "hsl(var(--sage))", fontFamily: "'Golos Text', sans-serif" }}>Разделы сайта</p>
+            <h2 className="text-4xl md:text-5xl font-light" style={{ fontFamily: "'Cormorant Garamond', serif", color: "hsl(var(--bark))" }}>
+              Всё, что нужно{" "}
+              <em className="italic" style={{ color: "hsl(var(--terra))" }}>садоводу</em>
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
-              { path: "/gallery", emoji: "🖼️", title: "Галерея", desc: "Фотографии сада и огорода в разные сезоны", bg: "#dff2df" },
-              { path: "/tips", emoji: "💡", title: "Советы", desc: "Практические советы по уходу за растениями", bg: "#fef3dc" },
-              { path: "/calendar", emoji: "📅", title: "Календарь", desc: "Что сажать и убирать каждый месяц", bg: "#fde8dc" },
+              { path: "/gallery", emoji: "🖼️", title: "Галерея", desc: "Фотографии сада и огорода в разные сезоны года", bg: "#dff2df", accent: "#2f6b3e" },
+              { path: "/garden", emoji: "🌸", title: "Советы по саду", desc: "Деревья, кустарники, цветы и плодовый сад — живые истории от опытных садоводов", bg: "#fff0f4", accent: "#a0364e" },
+              { path: "/vegetable", emoji: "🥕", title: "Советы по огороду", desc: "Томаты, огурцы, картофель и зелень — проверенные способы получить богатый урожай", bg: "#fef3e2", accent: "#c05621" },
+              { path: "/landscape", emoji: "🏡", title: "Дизайн участка", desc: "Стили, идеи и концепции для создания красивого и функционального пространства", bg: "#ebf8ff", accent: "#2c5282" },
+              { path: "/calendar", emoji: "📅", title: "Календарь посева", desc: "Сезонный планировщик: что сажать и убирать каждый месяц", bg: "#f0fff4", accent: "#276749" },
             ].map((card) => (
               <button
                 key={card.path}
                 onClick={() => navigate(card.path)}
-                className="text-left rounded-2xl p-6 transition-all hover:scale-105"
+                className="text-left rounded-2xl p-6"
                 style={{
                   background: card.bg,
-                  border: "1px solid hsl(var(--border))",
-                  boxShadow: "0 4px 20px rgba(40,60,20,0.06)",
+                  border: `1px solid ${card.accent}20`,
+                  boxShadow: `0 4px 20px ${card.accent}08`,
+                  transition: "transform 0.25s ease, box-shadow 0.25s ease",
                 }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)"; (e.currentTarget as HTMLElement).style.boxShadow = `0 14px 36px ${card.accent}18`; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; (e.currentTarget as HTMLElement).style.boxShadow = `0 4px 20px ${card.accent}08`; }}
               >
-                <span className="text-4xl block mb-4">{card.emoji}</span>
-                <h3
-                  className="text-xl font-semibold mb-2"
-                  style={{ fontFamily: "'Cormorant Garamond', serif", color: "hsl(var(--bark))" }}
-                >
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-4" style={{ background: `${card.accent}12`, border: `1px solid ${card.accent}20` }}>
+                  {card.emoji}
+                </div>
+                <h3 className="text-xl font-semibold mb-2" style={{ fontFamily: "'Cormorant Garamond', serif", color: "hsl(var(--bark))" }}>
                   {card.title}
                 </h3>
-                <p className="text-sm" style={{ color: "hsl(var(--muted-foreground))", fontFamily: "'Golos Text', sans-serif" }}>
+                <p className="text-sm leading-relaxed" style={{ color: "hsl(var(--muted-foreground))", fontFamily: "'Golos Text', sans-serif" }}>
                   {card.desc}
                 </p>
               </button>

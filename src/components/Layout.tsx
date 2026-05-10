@@ -5,7 +5,9 @@ import Icon from "@/components/ui/icon";
 const NAV_ITEMS = [
   { path: "/", label: "Главная" },
   { path: "/gallery", label: "Галерея" },
-  { path: "/tips", label: "Советы" },
+  { path: "/garden", label: "Сад" },
+  { path: "/vegetable", label: "Огород" },
+  { path: "/landscape", label: "Дизайн участка" },
   { path: "/calendar", label: "Календарь" },
 ];
 
