@@ -1,97 +1,133 @@
 import { useState } from "react";
 import Layout from "@/components/Layout";
+import Icon from "@/components/ui/icon";
 
 const TIPS = [
   {
+    id: 1,
+    author: "Василий Петрович",
+    authorAge: "72 года, огородник",
+    avatar: "👴",
+    tag: "Полив",
+    accent: "#2b7fc4",
+    accentLight: "#e8f4fd",
+    title: "Поливаю только утром — и никогда не болею",
+    story: `Лет сорок уже огородничаю. Раньше поливал когда придётся — то вечером после работы, то в обед в жару. И всё время на помидорах фитофтора, на огурцах мучнистая роса.
+
+Сосед Михалыч подсказал: поливай строго в 6 утра. Поначалу думал — блажь. Но попробовал. И знаешь — уже третий год без болезней на листьях. Вода впитывается, пока прохладно, а к полудню листья сухие.
+
+Теперь встаю с петухами, и не жалею ни капли.`,
+    image: "https://cdn.poehali.dev/projects/1a543a21-315b-4420-99b6-2c1390619624/files/ef2813a3-8e79-4aa3-a767-cee72a5de715.jpg",
     emoji: "💧",
-    title: "Полив ранним утром",
-    text: "Поливайте растения в 6–8 утра. Вода успевает впитаться до жары, а листья успевают просохнуть, предотвращая грибковые болезни.",
-    tag: "Уход",
-    accent: "#4a9fd4",
-    bg: "linear-gradient(135deg, #e8f4fd 0%, #d0eaf8 100%)",
-    iconBg: "#bee3f8",
   },
   {
-    emoji: "🌿",
-    title: "Мульчирование — секрет успеха",
-    text: "Слой мульчи 5–7 см из соломы или коры сохраняет влагу, подавляет сорняки и постепенно питает почву. Лучшее вложение для огородника.",
+    id: 2,
+    author: "Галина Фёдоровна",
+    authorAge: "65 лет, дачница",
+    avatar: "👵",
     tag: "Почва",
     accent: "#38a169",
-    bg: "linear-gradient(135deg, #e6f4ea 0%, #d0edda 100%)",
-    iconBg: "#c3e6cb",
+    accentLight: "#e6f4ea",
+    title: "Мульча спасла мою спину — и мой урожай",
+    story: `Раньше я всё лето воевала с сорняками. Каждую неделю — пропалывай, рыхли, поливай. Спина болела страшно, колени ныли.
+
+Дочка привезла из города книжку про природное земледелие. Там про мульчу написано. Я и подумала — а вдруг? Накидала между рядами солому от соседа, слоем сантиметров семь.
+
+Сорняков стало впятеро меньше. Земля под мульчой — живая, рыхлая, червей тьма. И влага держится — полив стал нужен вдвое реже. Теперь без мульчи — ни шагу.`,
+    image: "https://cdn.poehali.dev/projects/1a543a21-315b-4420-99b6-2c1390619624/files/997d85f1-8331-40a1-881d-4ab30f49f242.jpg",
+    emoji: "🌿",
   },
   {
-    emoji: "🪱",
-    title: "Дружите с червями",
-    text: "Дождевые черви — лучшие помощники. Рыхлите почву аккуратно, не используйте хлорсодержащие удобрения и добавляйте компост для их привлечения.",
-    tag: "Экология",
+    id: 3,
+    author: "Николай Иванович",
+    authorAge: "58 лет, фермер",
+    avatar: "👨‍🌾",
+    tag: "Агротехника",
     accent: "#c05621",
-    bg: "linear-gradient(135deg, #fef3e2 0%, #fde8c4 100%)",
-    iconBg: "#fbd38d",
-  },
-  {
-    emoji: "🌼",
-    title: "Компаньонные посадки",
-    text: "Базилик рядом с томатами отпугивает тлю. Бархатцы защищают от нематод. Укроп привлекает полезных насекомых — природная защита без химии.",
-    tag: "Советы",
-    accent: "#b7410e",
-    bg: "linear-gradient(135deg, #fff0f0 0%, #fde0e0 100%)",
-    iconBg: "#fed7d7",
-  },
-  {
+    accentLight: "#fef3e2",
+    title: "Пасынки удаляю — и томаты вырастают с кулак",
+    story: `Когда только начинал с томатами, не понимал зачем вообще эти пасынки убирать. Ну растёт и растёт куст — больше листьев, больше плодов, думал я.
+
+Первый год — кусты пышные, а помидоров мало и мелкие. Старый агроном на рынке объяснил: куст тратит силы на зелень, а не на плод.
+
+На следующий год убрал все пасынки, оставил два стебля. Томаты выросли как в магазине — крупные, мясистые. Сейчас соседи спрашивают секрет. Отвечаю: просто убирайте лишнее.`,
+    image: "https://cdn.poehali.dev/projects/1a543a21-315b-4420-99b6-2c1390619624/files/dbec53ef-e57e-4ba3-a4d1-c049d9fb4210.jpg",
     emoji: "✂️",
-    title: "Пасынкование томатов",
-    text: "Удаляйте пасынки утром в сухую погоду, когда они не длиннее 5 см. Оставляйте пенёк 1 см — это предотвратит повторный рост и убережёт от болезней.",
-    tag: "Агротехника",
-    accent: "#dd6b20",
-    bg: "linear-gradient(135deg, #fff5eb 0%, #fde8d0 100%)",
-    iconBg: "#fbd0a8",
   },
   {
-    emoji: "🌧️",
-    title: "Сбор дождевой воды",
-    text: "Дождевая вода мягкая и не содержит хлора — растения её обожают. Установите бочку под водосток: 200 л воды хватает на 2–3 полива среднего огорода.",
+    id: 4,
+    author: "Тамара Степановна",
+    authorAge: "70 лет, садовод",
+    avatar: "👩‍🌾",
     tag: "Полив",
-    accent: "#2b6cb0",
-    bg: "linear-gradient(135deg, #ebf8ff 0%, #d5effc 100%)",
-    iconBg: "#bee3f8",
+    accent: "#2c5282",
+    accentLight: "#ebf8ff",
+    title: "Дождевая бочка — моя главная помощница",
+    story: `Вода у нас на даче из скважины — жёсткая, хлорированная. Розы желтели, рассада плохо шла. Тратила деньги на удобрения, а толку мало.
+
+Муж поставил две бочки по 200 литров под крышей. После хорошего дождя — полные. Я ими стала поливать всё самое нежное: рассаду, клубнику, розы.
+
+Разница — небо и земля. Листья стали тёмно-зелёными, рассада пошла в рост. Вода мягкая, тёплая — растения её просто пьют взахлёб. Теперь и соседки попросили мужа бочки поставить.`,
+    image: "https://cdn.poehali.dev/projects/1a543a21-315b-4420-99b6-2c1390619624/files/a91a5292-c94a-414a-93e7-5f9fd74acc5c.jpg",
+    emoji: "🌧️",
   },
   {
-    emoji: "🌱",
-    title: "Правило севооборота",
-    text: "Не сажайте одну культуру на одно место два года подряд. Чередование культур снижает риск болезней и восстанавливает питательные вещества в почве.",
-    tag: "Агротехника",
-    accent: "#276749",
-    bg: "linear-gradient(135deg, #f0fff4 0%, #d5f5e3 100%)",
-    iconBg: "#c3fae8",
+    id: 5,
+    author: "Петрович с третьей улицы",
+    authorAge: "61 год, огородник",
+    avatar: "🧑‍🌾",
+    tag: "Экология",
+    accent: "#744210",
+    accentLight: "#fef3e2",
+    title: "Червей берегу как зеницу ока",
+    story: `Сосед по весне сыпал химию мешками. Урожай у него первые два года — хороший. На третий — земля как асфальт, ни одного червяка.
+
+Я пошёл другим путём. Компост из кухонных отходов, никакой химии. И знаешь — у меня под каждым кустом по десятку червяков. Земля рыхлится сама, без лопаты.
+
+Агроном из соседнего района приезжал — сказал, что у меня живая почва. Горжусь этим больше, чем урожаем.`,
+    image: "",
+    emoji: "🪱",
   },
   {
-    emoji: "🧪",
-    title: "Проверяйте кислотность почвы",
-    text: "pH 6.0–7.0 — оптимальный диапазон для большинства овощей. Добавьте доломитовую муку для снижения кислотности или торф для её повышения.",
-    tag: "Почва",
-    accent: "#553c9a",
-    bg: "linear-gradient(135deg, #faf5ff 0%, #ede0fa 100%)",
-    iconBg: "#e9d8fd",
-  },
-  {
-    emoji: "🐛",
-    title: "Биологическая защита",
-    text: "Высадите бархатцы и настурцию по периметру грядок — они отпугивают вредителей. Золотистые нематоды помогут справиться с проволочником в почве.",
-    tag: "Защита",
-    accent: "#276749",
-    bg: "linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)",
-    iconBg: "#bbf7d0",
+    id: 6,
+    author: "Людмила Архиповна",
+    authorAge: "67 лет, цветовод",
+    avatar: "👩",
+    tag: "Советы",
+    accent: "#702459",
+    accentLight: "#fff0f6",
+    title: "Бархатцы — мои телохранители",
+    story: `Двадцать лет страдала от нематод на клубнике. Покупала всякую химию — помогало на год, потом опять.
+
+Подруга из Краснодара написала: посади бархатцы по краю грядки. Я посмеялась сначала — цветочки против вредителей? Но посадила.
+
+Следующей весной выкопала корни клубники — нематод в разы меньше. А сад стал красивее. Теперь бархатцы у меня везде — и красиво, и польза. Природа умнее нас.`,
+    image: "",
+    emoji: "🌼",
   },
 ];
 
-const CATEGORIES = ["Все", "Уход", "Почва", "Полив", "Агротехника", "Экология", "Советы", "Защита"];
+const CATEGORIES = ["Все", "Полив", "Почва", "Агротехника", "Экология", "Советы"];
 
 export default function Tips() {
   const [activeCategory, setActiveCategory] = useState("Все");
-  const [expanded, setExpanded] = useState<number | null>(null);
+  const [favorites, setFavorites] = useState<Set<number>>(new Set());
+  const [showFavOnly, setShowFavOnly] = useState(false);
 
-  const filtered = activeCategory === "Все" ? TIPS : TIPS.filter((t) => t.tag === activeCategory);
+  const toggleFav = (id: number, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setFavorites((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) { next.delete(id); } else { next.add(id); }
+      return next;
+    });
+  };
+
+  const filtered = TIPS.filter((t) => {
+    const catOk = activeCategory === "Все" || t.tag === activeCategory;
+    const favOk = !showFavOnly || favorites.has(t.id);
+    return catOk && favOk;
+  });
 
   return (
     <Layout>
@@ -111,32 +147,32 @@ export default function Tips() {
             className="text-5xl md:text-7xl font-light mb-4"
             style={{ fontFamily: "'Cormorant Garamond', serif", color: "hsl(var(--bark))" }}
           >
-            Мудрость{" "}
+            Истории{" "}
             <em className="italic" style={{ color: "hsl(var(--moss))" }}>
-              из опыта
+              с грядок
             </em>
           </h1>
           <p
             className="text-base max-w-lg mx-auto"
             style={{ color: "hsl(var(--muted-foreground))", fontFamily: "'Golos Text', sans-serif" }}
           >
-            Проверенные советы от опытных садоводов — для тех, кто хочет вырастить богатый урожай без лишних хлопот
+            Живые советы от настоящих огородников — не из книг, а из собственного опыта
           </p>
         </div>
       </div>
 
-      <section className="py-12 px-6" style={{ background: "hsl(var(--cream))" }}>
+      <section className="py-10 px-6" style={{ background: "hsl(var(--cream))" }}>
         <div className="container max-w-6xl mx-auto">
 
-          {/* CATEGORY FILTERS */}
-          <div className="flex flex-wrap gap-3 mb-12 justify-center">
+          {/* FILTERS */}
+          <div className="flex flex-wrap items-center gap-3 mb-10 justify-center">
             {CATEGORIES.map((cat) => {
               const isActive = activeCategory === cat;
               return (
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className="px-5 py-2 rounded-full text-sm font-medium transition-all hover:scale-105"
+                  className="px-5 py-2 rounded-full text-sm font-medium"
                   style={{
                     fontFamily: "'Golos Text', sans-serif",
                     background: isActive ? "hsl(var(--forest))" : "hsl(var(--parchment))",
@@ -151,130 +187,196 @@ export default function Tips() {
                 </button>
               );
             })}
+
+            <button
+              onClick={() => setShowFavOnly(!showFavOnly)}
+              className="flex items-center gap-2 px-5 py-2 rounded-full text-sm font-medium ml-2"
+              style={{
+                fontFamily: "'Golos Text', sans-serif",
+                background: showFavOnly ? "#fff0f0" : "hsl(var(--parchment))",
+                color: showFavOnly ? "#c53030" : "hsl(var(--bark))",
+                border: `1px solid ${showFavOnly ? "#feb2b2" : "hsl(var(--border))"}`,
+                transition: "all 0.2s ease",
+              }}
+            >
+              <Icon name="Heart" size={14} />
+              Избранное
+              {favorites.size > 0 && (
+                <span
+                  className="w-5 h-5 rounded-full text-xs flex items-center justify-center font-bold"
+                  style={{ background: "#c53030", color: "white" }}
+                >
+                  {favorites.size}
+                </span>
+              )}
+            </button>
           </div>
 
           {/* CARDS */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {filtered.map((tip, i) => {
-              const isOpen = expanded === i;
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {filtered.map((tip) => {
+              const isFav = favorites.has(tip.id);
               return (
-                <div
-                  key={i}
-                  onClick={() => setExpanded(isOpen ? null : i)}
-                  className="rounded-2xl overflow-hidden cursor-pointer group"
+                <article
+                  key={tip.id}
+                  className="rounded-3xl overflow-hidden"
                   style={{
-                    background: tip.bg,
-                    border: `1px solid ${tip.accent}22`,
-                    boxShadow: isOpen
-                      ? `0 16px 48px ${tip.accent}30`
-                      : `0 4px 16px ${tip.accent}12`,
-                    transform: isOpen ? "scale(1.02)" : "scale(1)",
-                    transition: "all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)",
+                    background: "white",
+                    border: `1px solid ${tip.accent}20`,
+                    boxShadow: `0 6px 32px ${tip.accent}12`,
+                    transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)";
+                    (e.currentTarget as HTMLElement).style.boxShadow = `0 16px 48px ${tip.accent}22`;
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
+                    (e.currentTarget as HTMLElement).style.boxShadow = `0 6px 32px ${tip.accent}12`;
                   }}
                 >
-                  {/* Цветная полоска сверху */}
-                  <div
-                    className="h-1.5 w-full"
-                    style={{ background: `linear-gradient(90deg, ${tip.accent}, ${tip.accent}88)` }}
-                  />
-
-                  <div className="p-6">
-                    {/* Иконка + тег */}
-                    <div className="flex items-start justify-between mb-5">
+                  {/* Фото */}
+                  {tip.image ? (
+                    <div className="relative overflow-hidden" style={{ height: "220px" }}>
+                      <img
+                        src={tip.image}
+                        alt={tip.title}
+                        className="w-full h-full object-cover"
+                        style={{ transition: "transform 0.6s ease" }}
+                        onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.06)")}
+                        onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+                      />
                       <div
-                        className="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl"
-                        style={{
-                          background: tip.iconBg,
-                          boxShadow: `0 4px 12px ${tip.accent}20`,
-                          transition: "transform 0.3s ease",
-                          transform: isOpen ? "rotate(-5deg) scale(1.1)" : "rotate(0deg) scale(1)",
-                        }}
-                      >
-                        {tip.emoji}
-                      </div>
+                        className="absolute inset-0"
+                        style={{ background: "linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 60%)" }}
+                      />
                       <span
-                        className="text-xs font-semibold px-3 py-1 rounded-full mt-1"
-                        style={{
-                          background: tip.accent + "18",
-                          color: tip.accent,
-                          fontFamily: "'Golos Text', sans-serif",
-                          border: `1px solid ${tip.accent}30`,
-                        }}
+                        className="absolute top-4 left-4 text-xs font-semibold px-3 py-1 rounded-full"
+                        style={{ background: tip.accent, color: "white", fontFamily: "'Golos Text', sans-serif" }}
                       >
                         {tip.tag}
                       </span>
+                      <button
+                        onClick={(e) => toggleFav(tip.id, e)}
+                        className="absolute top-3 right-4 w-9 h-9 rounded-full flex items-center justify-center"
+                        style={{
+                          background: isFav ? "#c53030" : "rgba(255,255,255,0.85)",
+                          backdropFilter: "blur(4px)",
+                          transform: isFav ? "scale(1.1)" : "scale(1)",
+                          transition: "all 0.2s cubic-bezier(0.34,1.56,0.64,1)",
+                        }}
+                      >
+                        <Icon name="Heart" size={16} style={{ color: isFav ? "white" : "#c53030" }} />
+                      </button>
+                    </div>
+                  ) : (
+                    <div
+                      className="relative flex items-center justify-between px-6 pt-5 pb-4"
+                      style={{ background: tip.accentLight }}
+                    >
+                      <span className="text-5xl">{tip.emoji}</span>
+                      <div className="flex items-center gap-3">
+                        <span
+                          className="text-xs font-semibold px-3 py-1 rounded-full"
+                          style={{ background: tip.accent, color: "white", fontFamily: "'Golos Text', sans-serif" }}
+                        >
+                          {tip.tag}
+                        </span>
+                        <button
+                          onClick={(e) => toggleFav(tip.id, e)}
+                          className="w-9 h-9 rounded-full flex items-center justify-center"
+                          style={{
+                            background: isFav ? "#c53030" : "rgba(255,255,255,0.9)",
+                            border: `1px solid ${isFav ? "#c53030" : "#e2e8f0"}`,
+                            transform: isFav ? "scale(1.1)" : "scale(1)",
+                            transition: "all 0.2s cubic-bezier(0.34,1.56,0.64,1)",
+                          }}
+                        >
+                          <Icon name="Heart" size={16} style={{ color: isFav ? "white" : "#c53030" }} />
+                        </button>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Тело карточки */}
+                  <div className="p-6">
+                    {/* Автор */}
+                    <div className="flex items-center gap-3 mb-4">
+                      <div
+                        className="w-10 h-10 rounded-full flex items-center justify-center text-xl flex-shrink-0"
+                        style={{ background: tip.accentLight, border: `2px solid ${tip.accent}30` }}
+                      >
+                        {tip.avatar}
+                      </div>
+                      <div>
+                        <div
+                          className="text-sm font-semibold leading-none mb-0.5"
+                          style={{ color: "hsl(var(--bark))", fontFamily: "'Golos Text', sans-serif" }}
+                        >
+                          {tip.author}
+                        </div>
+                        <div
+                          className="text-xs"
+                          style={{ color: "hsl(var(--muted-foreground))", fontFamily: "'Golos Text', sans-serif" }}
+                        >
+                          {tip.authorAge}
+                        </div>
+                      </div>
                     </div>
 
                     {/* Заголовок */}
                     <h3
-                      className="text-xl font-semibold mb-3 leading-snug"
-                      style={{
-                        fontFamily: "'Cormorant Garamond', serif",
-                        color: "hsl(var(--bark))",
-                        fontSize: "1.25rem",
-                      }}
+                      className="text-2xl font-semibold mb-4 leading-snug"
+                      style={{ fontFamily: "'Cormorant Garamond', serif", color: "hsl(var(--bark))" }}
                     >
                       {tip.title}
                     </h3>
 
-                    {/* Текст — всегда видимый */}
-                    <p
-                      className="text-sm leading-relaxed"
-                      style={{
-                        color: "hsl(var(--muted-foreground))",
-                        fontFamily: "'Golos Text', sans-serif",
-                      }}
-                    >
-                      {tip.text}
-                    </p>
-
-                    {/* Разворачиваемая подсказка */}
+                    {/* История */}
                     <div
-                      style={{
-                        maxHeight: isOpen ? "120px" : "0px",
-                        overflow: "hidden",
-                        transition: "max-height 0.4s ease",
-                      }}
+                      className="text-sm leading-7 whitespace-pre-line"
+                      style={{ color: "hsl(var(--foreground))", fontFamily: "'Golos Text', sans-serif", opacity: 0.82 }}
                     >
-                      <div
-                        className="mt-4 pt-4 text-xs leading-relaxed"
-                        style={{
-                          borderTop: `1px dashed ${tip.accent}40`,
-                          color: tip.accent,
-                          fontFamily: "'Golos Text', sans-serif",
-                        }}
-                      >
-                        💬 <em>Совет от практика:</em> попробуйте применить этот метод уже в следующем сезоне — результат не заставит себя ждать.
-                      </div>
+                      {tip.story}
                     </div>
 
-                    {/* Кнопка развернуть */}
+                    {/* Нижняя полоса */}
                     <div
-                      className="flex items-center gap-1.5 mt-4 text-xs font-medium"
-                      style={{ color: tip.accent, fontFamily: "'Golos Text', sans-serif" }}
+                      className="mt-5 pt-4 flex items-center justify-between"
+                      style={{ borderTop: `1px dashed ${tip.accent}30` }}
                     >
-                      <span>{isOpen ? "Свернуть" : "Подробнее"}</span>
                       <span
+                        className="text-xs italic"
+                        style={{ color: tip.accent, fontFamily: "'Cormorant Garamond', serif", fontSize: "0.95rem" }}
+                      >
+                        «Проверено на собственном огороде»
+                      </span>
+                      <button
+                        onClick={(e) => toggleFav(tip.id, e)}
+                        className="flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full"
                         style={{
-                          display: "inline-block",
-                          transition: "transform 0.3s ease",
-                          transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
+                          background: isFav ? "#fff0f0" : "hsl(var(--parchment))",
+                          color: isFav ? "#c53030" : "hsl(var(--muted-foreground))",
+                          border: `1px solid ${isFav ? "#feb2b2" : "hsl(var(--border))"}`,
+                          fontFamily: "'Golos Text', sans-serif",
+                          transition: "all 0.2s ease",
                         }}
                       >
-                        ↓
-                      </span>
+                        <Icon name="Heart" size={12} />
+                        {isFav ? "В избранном" : "Сохранить"}
+                      </button>
                     </div>
                   </div>
-                </div>
+                </article>
               );
             })}
           </div>
 
           {filtered.length === 0 && (
             <div className="text-center py-20">
-              <p className="text-5xl mb-4">🌱</p>
+              <p className="text-5xl mb-4">{showFavOnly ? "🤍" : "🌱"}</p>
               <p style={{ color: "hsl(var(--muted-foreground))", fontFamily: "'Golos Text', sans-serif" }}>
-                В этой категории пока нет советов
+                {showFavOnly ? "Вы пока не сохранили ни одного совета" : "В этой категории пока нет историй"}
               </p>
             </div>
           )}
